@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grundlagen der Netzwerkkommunikation - Detaillierte Übersicht</title>
+    <style>
+        /* Google Font Integration */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        /* Grundlegende Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        /* Main Content Styles */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        /* Sidebar Styles */
+        aside {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            margin-right: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        aside h2 {
+            font-size: 1.5em;
+            margin-top: 0;
+            color: #4CAF50;
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        aside ul li {
+            margin-bottom: 10px;
+        }
+
+        aside ul li a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        aside ul li a:hover {
+            color: #4CAF50;
+        }
+
+        /* Article Styles */
+        article {
+            flex: 3;
+            min-width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        article h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        article h3 {
+            color: #333;
+            margin-top: 1.5em;
+        }
+
+        article table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        article table, article th, article td {
+            border: 1px solid #ddd;
+        }
+
+        article th, article td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        article th {
+            background-color: #f2f2f2;
+        }
+
+        /* Code Block Styles */
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            aside {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Grundlagen der Netzwerkkommunikation</h1>
+    </header>
+
+    <nav>
+        <a href="#1-grundlagen-der-netzwerkkommunikation">Grundlagen</a>
+        <a href="#2-nutzdaten-und-ihre-rolle-im-netzwerk">Nutzdaten</a>
+        <a href="#3-datenkapselung-im-detail">Datenkapselung</a>
+        <a href="#4-segmentierung-und-re-assemblierung">Segmentierung</a>
+        <a href="#5-multiplexing">Multiplexing</a>
+        <a href="#6-horizontale-und-vertikale-kommunikation">Kommunikation</a>
+        <a href="#7-protokollkommunikation-im-tcpip-modell">Protokolle</a>
+        <a href="#8-zusammenfassung">Zusammenfassung</a>
+        <a href="#9-anhang-tabellen-und-beispiele">Anhang</a>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <h2>Inhaltsverzeichnis</h2>
+            <ul>
+                <li><a href="#1-grundlagen-der-netzwerkkommunikation">1. Grundlagen der Netzwerkkommunikation</a></li>
+                <li><a href="#2-nutzdaten-und-ihre-rolle-im-netzwerk">2. Nutzdaten und ihre Rolle im Netzwerk</a></li>
+                <li><a href="#3-datenkapselung-im-detail">3. Datenkapselung im Detail</a></li>
+                <li><a href="#4-segmentierung-und-re-assemblierung">4. Segmentierung und Re-Assemblierung</a></li>
+                <li><a href="#5-multiplexing">5. Multiplexing</a></li>
+                <li><a href="#6-horizontale-und-vertikale-kommunikation">6. Horizontale und vertikale Kommunikation</a></li>
+                <li><a href="#7-protokollkommunikation-im-tcpip-modell">7. Protokollkommunikation im TCP/IP-Modell</a></li>
+                <li><a href="#8-zusammenfassung">8. Zusammenfassung</a></li>
+                <li><a href="#9-anhang-tabellen-und-beispiele">9. Anhang: Tabellen und Beispiele</a></li>
+            </ul>
+        </aside>
+
+        <article>
+            <section id="1-grundlagen-der-netzwerkkommunikation">
+                <h2>1. Grundlagen der Netzwerkkommunikation</h2>
+                <p>Die Netzwerkkommunikation bildet das Fundament moderner Informationssysteme. Sie ermöglicht den Austausch von Daten zwischen verschiedenen Geräten über physische und logische Verbindungen. Dieses Kapitel behandelt die grundlegenden Elemente und Konzepte der Netzwerkkommunikation.</p>
+
+                <h3>Elemente der Kommunikation</h3>
+                <ol>
+                    <li><strong>Sender:</strong>
+                        <ul>
+                            <li><strong>Definition:</strong> Das Gerät oder die Person, die eine Nachricht sendet.</li>
+                            <li><strong>Beispiele:</strong> Computer, Smartphones, Server, IoT-Geräte.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Empfänger:</strong>
+                        <ul>
+                            <li><strong>Definition:</strong> Das Ziel der Nachricht, das die gesendeten Daten empfängt.</li>
+                            <li><strong>Beispiele:</strong> Andere Computer, Server, Drucker.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Übertragungskanal:</strong>
+                        <ul>
+                            <li><strong>Definition:</strong> Der physische oder digitale Weg, über den die Nachricht gesendet wird.</li>
+                            <li><strong>Beispiele:</strong> Ethernet-Kabel, WLAN, Glasfaser, Funkwellen.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Beispiel zur Veranschaulichung</h3>
+                <p>Wenn du eine Nachricht in einem Chat schreibst:</p>
+                <ul>
+                    <li><strong>Sender:</strong> Dein Smartphone oder Computer.</li>
+                    <li><strong>Übertragungskanal:</strong> Das Internet (kann verschiedene physische Medien umfassen).</li>
+                    <li><strong>Empfänger:</strong> Das Gerät der Person, die die Nachricht liest.</li>
+                </ul>
+
+                <h3>Diagramm: Elemente der Netzwerkkommunikation</h3>
+                <pre>
+[Sender] ---> [Übertragungskanal] ---> [Empfänger]
+                </pre>
+            </section>
+
+            <section id="2-nutzdaten-und-ihre-rolle-im-netzwerk">
+                <h2>2. Nutzdaten und ihre Rolle im Netzwerk</h2>
+                <h3>Definition von Nutzdaten (Payload)</h3>
+                <p>Nutzdaten sind die eigentlichen Informationen, die zwischen Sender und Empfänger ausgetauscht werden. Sie repräsentieren den Inhalt der Kommunikation, im Gegensatz zu den Kontrollinformationen, die für die Organisation und Übertragung der Daten notwendig sind.</p>
+
+                <h3>Aufbau von Datenpaketen mit Nutzdaten</h3>
+                <p>Ein Datenpaket besteht aus mehreren Bestandteilen:</p>
+                <ol>
+                    <li><strong>Header:</strong>
+                        <ul>
+                            <li>Enthält Kontrollinformationen wie Absender, Empfänger, Sequenznummer und Protokollangaben.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Nutzdaten (Payload):</strong>
+                        <ul>
+                            <li>Der eigentliche Inhalt der Kommunikation, z.B. Text, Bilder oder Dateidaten.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Footer:</strong>
+                        <ul>
+                            <li>Kann zusätzliche Kontrollinformationen wie Prüfsummen zur Fehlererkennung enthalten.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Beispieltabelle: Bestandteile eines Datenpakets (HTTP-Anfrage)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bestandteil</th>
+                            <th>Beispiel (HTTP-Anfrage)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Header</td>
+                            <td>Absender: 192.168.1.2</td>
+                        </tr>
+                        <tr>
+                            <td>Nutzdaten</td>
+                            <td><code>GET /index.html HTTP/1.1</code></td>
+                        </tr>
+                        <tr>
+                            <td>Footer</td>
+                            <td>Prüfsumme: 0xAC34</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="3-datenkapselung-im-detail">
+                <h2>3. Datenkapselung im Detail</h2>
+                <p>Die Datenkapselung ist ein zentraler Prozess in der Netzwerkkommunikation, bei dem die Nutzdaten durch die verschiedenen Schichten des TCP/IP-Modells transportiert und mit spezifischen Kontrollinformationen angereichert werden. Jede Schicht fügt dabei eigene Informationen hinzu, die für ihre Funktion erforderlich sind.</p>
+
+                <h3>Schichten des TCP/IP-Modells</h3>
+                <ol>
+                    <li>Anwendungsschicht (Application Layer)</li>
+                    <li>Transportschicht (Transport Layer)</li>
+                    <li>Internetschicht (Internet Layer)</li>
+                    <li>Netzzugangsschicht (Network Access Layer)</li>
+                </ol>
+
+                <h3>Schritte der Datenkapselung</h3>
+                <ol>
+                    <li><strong>Anwendungsschicht:</strong>
+                        <ul>
+                            <li><strong>Aufgabe:</strong> Erstellung der Nutzdaten.</li>
+                            <li><strong>Beispiel:</strong> Eine HTTP-GET-Anfrage (<code>GET /index.html</code>).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Transportschicht:</strong>
+                        <ul>
+                            <li><strong>Aufgabe:</strong> Aufteilung der Nutzdaten in Segmente.</li>
+                            <li><strong>Hinzugefügte Informationen:</strong> Quell- und Zielport, Sequenznummern.</li>
+                            <li><strong>Beispiel:</strong> TCP-Segment mit Sequenznummern für die korrekte Reihenfolge.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Internetschicht:</strong>
+                        <ul>
+                            <li><strong>Aufgabe:</strong> Verpackung der Segmente in Pakete.</li>
+                            <li><strong>Hinzugefügte Informationen:</strong> Absender- und Empfänger-IP-Adressen, Protokollinformationen.</li>
+                            <li><strong>Beispiel:</strong> IP-Paket mit Quell- und Zieladresse.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Netzzugangsschicht:</strong>
+                        <ul>
+                            <li><strong>Aufgabe:</strong> Umwandlung der Pakete in Frames.</li>
+                            <li><strong>Hinzugefügte Informationen:</strong> MAC-Adressen des Absenders und Empfängers.</li>
+                            <li><strong>Beispiel:</strong> Ethernet-Frame mit MAC-Adressen und Prüfsumme.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Visualisierung der Kapselung</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Schicht</th>
+                            <th>Beispiel (HTTP-GET)</th>
+                            <th>Zusätzliche Daten (Header)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anwendungsschicht</td>
+                            <td><code>GET /index.html HTTP/1.1</code></td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Transportschicht</td>
+                            <td>Segment mit Nutzdaten</td>
+                            <td>Quell- und Zielport, Sequenznummer</td>
+                        </tr>
+                        <tr>
+                            <td>Internetschicht</td>
+                            <td>Paket mit Segment</td>
+                            <td>Absender- und Empfänger-IP</td>
+                        </tr>
+                        <tr>
+                            <td>Netzzugangsschicht</td>
+                            <td>Frame mit Paket</td>
+                            <td>MAC-Adressen</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="4-segmentierung-und-re-assemblierung">
+                <h2>4. Segmentierung und Re-Assemblierung</h2>
+                <h3>Definition und Bedeutung</h3>
+                <p><strong>Segmentierung</strong> und <strong>Re-Assemblierung</strong> sind wesentliche Prozesse in der Netzwerkkommunikation, die sicherstellen, dass große Datenmengen effizient und zuverlässig übertragen werden können.</p>
+                <ul>
+                    <li><strong>Segmentierung:</strong> Der Prozess, bei dem große Datenmengen in kleinere, handhabbare Einheiten (Segmente) unterteilt werden, die leichter über das Netzwerk transportiert werden können.</li>
+                    <li><strong>Re-Assemblierung:</strong> Der Prozess, bei dem die empfangenen Segmente am Zielort wieder in ihre ursprüngliche Reihenfolge gebracht und zusammengefügt werden, um die vollständigen Daten wiederherzustellen.</li>
+                </ul>
+
+                <h3>Detaillierter Prozess der Segmentierung und Re-Assemblierung</h3>
+
+                <h4>1. Segmentierung am Sender</h4>
+                <p><strong>Warum Segmentierung?</strong></p>
+                <ul>
+                    <li>Netzwerke haben oft Beschränkungen hinsichtlich der maximalen Paketgröße (z.B. das Maximum Transmission Unit, MTU).</li>
+                    <li>Große Datenmengen müssen effizient übermittelt werden, ohne Netzüberlastungen zu verursachen.</li>
+                </ul>
+
+                <p><strong>Wie funktioniert Segmentierung?</strong></p>
+                <ul>
+                    <li>Die Transportschicht (z.B. TCP) teilt die Daten in kleinere Segmente.</li>
+                    <li>Jedes Segment erhält eine <strong>Sequenznummer</strong>, die die Reihenfolge der Segmente identifiziert.</li>
+                    <li>Zusätzliche Informationen wie <strong>Quell- und Zielportnummern</strong> werden im Header jedes Segments hinzugefügt.</li>
+                </ul>
+
+                <p><strong>Beispiel:</strong></p>
+                <ul>
+                    <li>Eine 10.000-Byte große Datei wird in 5 Segmente zu je 2.000 Byte unterteilt.</li>
+                    <li>Jedes Segment wird separat mit einer Sequenznummer versehen (Segment 1: 0-1999, Segment 2: 2000-3999, usw.).</li>
+                </ul>
+
+                <h4>2. Übertragung über das Netzwerk</h4>
+                <p><strong>Heterogene Wege:</strong></p>
+                <ul>
+                    <li>Segmente können unterschiedliche Routen durch das Netzwerk nehmen, abhängig von der aktuellen Netzwerkbelastung und den Routing-Algorithmen.</li>
+                    <li>Dies kann dazu führen, dass Segmente in einer anderen Reihenfolge ankommen als sie gesendet wurden.</li>
+                </ul>
+
+                <h4>3. Re-Assemblierung am Empfänger</h4>
+                <p><strong>Empfang der Segmente:</strong></p>
+                <ul>
+                    <li>Der Empfänger erhält die Segmente möglicherweise in unterschiedlicher Reihenfolge.</li>
+                    <li>Anhand der <strong>Sequenznummern</strong> ordnet der Empfänger die Segmente korrekt.</li>
+                </ul>
+
+                <p><strong>Wiederherstellung der vollständigen Daten:</strong></p>
+                <ul>
+                    <li>Die Transportschicht (z.B. TCP) stellt sicher, dass alle Segmente vorhanden sind.</li>
+                    <li>Fehlende Segmente werden erneut angefordert (Retransmission).</li>
+                    <li>Nach vollständigem Empfang werden die Segmente zusammengefügt, um die ursprünglichen Daten wiederherzustellen.</li>
+                </ul>
+
+                <p><strong>Beispiel:</strong></p>
+                <ul>
+                    <li>Segmente 3 und 5 kommen vor Segment 2 und 4 an.</li>
+                    <li>Der Empfänger ordnet die Segmente basierend auf den Sequenznummern und fordert ggf. fehlende Segmente erneut an.</li>
+                </ul>
+
+                <h3>Vorteile der Segmentierung und Re-Assemblierung</h3>
+                <ul>
+                    <li><strong>Effiziente Nutzung der Netzwerkressourcen:</strong> Kleinere Segmente können leichter über verschiedene Netzwerkelemente verteilt werden.</li>
+                    <li><strong>Erhöhte Zuverlässigkeit:</strong> Fehlerhafte oder verlorene Segmente können individuell erneut übertragen werden, ohne die gesamte Nachricht neu senden zu müssen.</li>
+                    <li><strong>Flexibilität:</strong> Ermöglicht die gleichzeitige Übertragung mehrerer Datenströme über dasselbe Netzwerk.</li>
+                </ul>
+
+                <h3>Diagramm: Segmentierung und Re-Assemblierung bei TCP</h3>
+                <pre>
+Sender:
++---------------------+
+| Anwendungsschicht   |
+| Daten (5000 Bytes)  |
++---------------------+
+          |
+          v
++---------------------+
+| Transportschicht    |
+| Segment 1: 0-999    |
+| Segment 2: 1000-1999|
+| ...                 |
++---------------------+
+          |
+          v
+[Übertragungskanal]
+          |
+          v
+Empfänger:
++---------------------+
+| Transportschicht    |
+| Re-Assemblierung    |
+| Daten (5000 Bytes)  |
++---------------------+
+          |
+          v
++---------------------+
+| Anwendungsschicht   |
+| Daten empfangen     |
++---------------------+
+                </pre>
+            </section>
+
+            <section id="5-multiplexing">
+                <h2>5. Multiplexing</h2>
+                <h3>Definition und Bedeutung</h3>
+                <p><strong>Multiplexing</strong> ist eine Technik, die es ermöglicht, mehrere Datenströme gleichzeitig über dasselbe physische Medium zu übertragen. Dies geschieht, indem die Datenströme zeitlich oder frequenzmäßig aufgeteilt werden, sodass sie effizient und ohne Kollision übertragen werden können.</p>
+
+                <h3>Arten des Multiplexings</h3>
+                <ol>
+                    <li><strong>Zeitmultiplexing (Time Division Multiplexing, TDM):</strong>
+                        <ul>
+                            <li><strong>Funktionsweise:</strong> Verschiedene Datenströme teilen sich die gleiche Leitung in unterschiedlichen Zeitfenstern.</li>
+                            <li><strong>Anwendung:</strong> Telefonnetze, digitale Signalübertragung.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Frequenzmultiplexing (Frequency Division Multiplexing, FDM):</strong>
+                        <ul>
+                            <li><strong>Funktionsweise:</strong> Verschiedene Datenströme werden auf unterschiedlichen Frequenzbändern innerhalb derselben Leitung übertragen.</li>
+                            <li><strong>Anwendung:</strong> Radio- und Fernsehsendungen, DSL-Internet.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Wellenlängenmultiplexing (Wavelength Division Multiplexing, WDM):</strong>
+                        <ul>
+                            <li><strong>Funktionsweise:</strong> Ähnlich wie FDM, aber spezifisch für Glasfaserleitungen, bei denen verschiedene Lichtwellenlängen verwendet werden.</li>
+                            <li><strong>Anwendung:</strong> Hochgeschwindigkeits-Glasfasernetzwerke.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Codesmultiplexing (Code Division Multiplexing, CDM):</strong>
+                        <ul>
+                            <li><strong>Funktionsweise:</strong> Jeder Datenstrom wird mit einem einzigartigen Code versehen, der es ermöglicht, mehrere Datenströme gleichzeitig über dasselbe Medium zu übertragen.</li>
+                            <li><strong>Anwendung:</strong> Mobilfunknetze (z.B. CDMA).</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Wie funktioniert Multiplexing?</h3>
+                <p><strong>Ziel:</strong> Maximierung der Effizienz der Nutzung des Übertragungsmediums, indem mehrere Datenströme gleichzeitig übertragen werden.</p>
+                <ol>
+                    <li><strong>Aufteilung der Datenströme:</strong> Die verschiedenen Datenströme werden entweder zeitlich oder frequenzmäßig getrennt.</li>
+                    <li><strong>Kombination der Datenströme:</strong> Die getrennten Datenströme werden zu einem kombinierten Signal zusammengeführt.</li>
+                    <li><strong>Übertragung:</strong> Das kombinierte Signal wird über das physische Medium übertragen.</li>
+                    <li><strong>Demultiplexing am Empfänger:</strong> Das kombinierte Signal wird wieder in die ursprünglichen Datenströme aufgeteilt.</li>
+                </ol>
+
+                <h3>Beispiel: Multiplexing im Alltag</h3>
+                <ul>
+                    <li><strong>Internet und Fernsehen über dasselbe Kabel:</strong> Ein Kabelanbieter nutzt FDM, um sowohl Internetdaten als auch Fernsehsignale über dasselbe Glasfaserkabel zu übertragen, indem sie unterschiedliche Frequenzbänder für jeden Dienst verwenden.</li>
+                    <li><strong>Smartphone-Netzwerke:</strong> Mobilfunknetze verwenden CDM, um gleichzeitig Sprach- und Datenkommunikation von verschiedenen Benutzern über dieselbe Frequenz zu übertragen.</li>
+                </ul>
+
+                <h3>Vorteile des Multiplexings</h3>
+                <ul>
+                    <li><strong>Erhöhte Effizienz:</strong> Mehrere Datenströme können gleichzeitig über dasselbe Medium übertragen werden, was die Ausnutzung der Bandbreite maximiert.</li>
+                    <li><strong>Kosteneinsparungen:</strong> Reduziert die Notwendigkeit für separate Leitungen für verschiedene Dienste, was Kosten spart.</li>
+                    <li><strong>Skalierbarkeit:</strong> Ermöglicht die einfache Erweiterung der Kapazität durch Hinzufügen weiterer Datenströme.</li>
+                </ul>
+
+                <h3>Diagramm: Multiplexing und Demultiplexing</h3>
+                <pre>
+[Mehrere Datenströme]
+      |        |        |
+      v        v        v
+ [Multiplexer] --> [Übertragungskanal] --> [Demultiplexer]
+      |        |        |
+      v        v        v
+[Empfangende Datenströme]
+                </pre>
+
+                <h3>Beispieltabelle: Vergleich der Multiplexing-Methoden</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Multiplexing-Typ</th>
+                            <th>Funktionsweise</th>
+                            <th>Anwendungsbeispiele</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TDM</td>
+                            <td>Datenströme teilen sich das Medium in Zeitfenstern</td>
+                            <td>Telefonnetze, digitale Signalübertragung</td>
+                        </tr>
+                        <tr>
+                            <td>FDM</td>
+                            <td>Datenströme nutzen unterschiedliche Frequenzbänder</td>
+                            <td>Radio, Fernsehen, DSL-Internet</td>
+                        </tr>
+                        <tr>
+                            <td>WDM</td>
+                            <td>Nutzung verschiedener Lichtwellenlängen in Glasfaser</td>
+                            <td>Hochgeschwindigkeits-Glasfasernetzwerke</td>
+                        </tr>
+                        <tr>
+                            <td>CDM</td>
+                            <td>Datenströme werden mit einzigartigen Codes versehen</td>
+                            <td>Mobilfunknetze (CDMA)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Multiplexing in der Praxis: Ein detailliertes Beispiel</h3>
+                <p><strong>Szenario:</strong> Ein Unternehmen nutzt eine Glasfaserverbindung, um sowohl Internetzugang als auch interne Netzwerkkommunikation bereitzustellen.</p>
+                <ul>
+                    <li><strong>Anwendung von WDM:</strong>
+                        <ul>
+                            <li><strong>Datenstrom 1 (Internet):</strong> Wird auf einer bestimmten Lichtwellenlänge (z.B. 1550 nm) übertragen.</li>
+                            <li><strong>Datenstrom 2 (Internes Netzwerk):</strong> Wird auf einer anderen Lichtwellenlänge (z.B. 1310 nm) übertragen.</li>
+                            <li><strong>Nutzen:</strong> Beide Datenströme können gleichzeitig über dieselbe Glasfaser geleitet werden, ohne sich gegenseitig zu stören, wodurch die Gesamtbandbreite effektiv genutzt wird.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="6-horizontale-und-vertikale-kommunikation">
+                <h2>6. Horizontale und vertikale Kommunikation</h2>
+                <p>Die Kommunikation in Netzwerken kann auf zwei Arten beschrieben werden: vertikale und horizontale Kommunikation. Beide sind essenziell für den reibungslosen Datenaustausch zwischen Geräten.</p>
+
+                <h3>Vertikale Kommunikation</h3>
+                <ul>
+                    <li><strong>Definition:</strong> Beschreibt den Datentransport durch die verschiedenen Schichten des TCP/IP-Modells auf einem einzelnen Gerät.</li>
+                    <li><strong>Ablauf:</strong>
+                        <ol>
+                            <li>Daten beginnen in der Anwendungsschicht und durchlaufen die Transportschicht, Internetschicht und Netzzugangsschicht.</li>
+                            <li>Beim Empfänger durchlaufen die Daten die Schichten in umgekehrter Reihenfolge (Dekapselung).</li>
+                        </ol>
+                    </li>
+                    <li><strong>Beispiel:</strong> Eine HTTP-Anfrage wird von der Anwendungsschicht bis zur Netzzugangsschicht gekapselt und dann physisch gesendet. Der Empfänger dekapselt die Daten wieder von der Netzzugangsschicht bis zur Anwendungsschicht.</li>
+                </ul>
+
+                <h3>Horizontale Kommunikation</h3>
+                <ul>
+                    <li><strong>Definition:</strong> Beschreibt die Kommunikation zwischen gleichartigen Schichten auf verschiedenen Geräten.</li>
+                    <li><strong>Ablauf:</strong>
+                        <ol>
+                            <li>Die Transportschichten von Sender und Empfänger kommunizieren über TCP.</li>
+                            <li>Die Internetschichten kümmern sich um das Routing der Pakete.</li>
+                            <li>Die Netzzugangsschichten senden und empfangen Frames basierend auf MAC-Adressen.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Beispiel:</strong> Die Transportschicht des Senders sendet TCP-Segmente an die Transportschicht des Empfängers, während die Internetschicht die Pakete routet und die Netzzugangsschicht die Frames überträgt.</li>
+                </ul>
+
+                <h3>Vergleichstabelle: Vertikale vs. Horizontale Kommunikation</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Art</th>
+                            <th>Beschreibung</th>
+                            <th>Beispiel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vertikale Kommunikation</td>
+                            <td>Transport der Daten durch die verschiedenen Schichten auf einem Gerät.</td>
+                            <td>HTTP-Anfrage wird durch die Anwendungsschicht gekapselt, bevor sie gesendet wird.</td>
+                        </tr>
+                        <tr>
+                            <td>Horizontale Kommunikation</td>
+                            <td>Kommunikation zwischen gleichartigen Schichten auf verschiedenen Geräten.</td>
+                            <td>Die Transportschicht des Senders kommuniziert mit der Transportschicht des Empfängers über TCP-Segmente.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="7-protokollkommunikation-im-tcpip-modell">
+                <h2>7. Protokollkommunikation im TCP/IP-Modell</h2>
+                <p>Das TCP/IP-Modell ist ein Schichtenmodell, das die Netzwerkkommunikation in verschiedene Ebenen unterteilt. Jede Schicht hat spezifische Protokolle, die den Datenaustausch und die Kommunikation regeln.</p>
+
+                <h3>1. Anwendungsschicht</h3>
+                <ul>
+                    <li><strong>Beispiele:</strong> HTTP, SMTP, DNS.</li>
+                    <li><strong>Funktion:</strong>
+                        <ul>
+                            <li>Stellt Netzwerkdienste für Anwendungen bereit.</li>
+                            <li>Kommuniziert direkt mit den Anwendungen auf dem Endgerät.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Protokollkommunikation:</strong>
+                        <ul>
+                            <li>Ein Webbrowser (HTTP-Client) sendet eine <code>GET</code>-Anfrage an einen Webserver (HTTP-Server), der darauf mit einer HTML-Datei antwortet.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>2. Transportschicht</h3>
+                <ul>
+                    <li><strong>Beispiele:</strong> TCP, UDP.</li>
+                    <li><strong>Funktion:</strong>
+                        <ul>
+                            <li>Teilt Daten in Segmente auf.</li>
+                            <li>Sichert die Reihenfolge und Zuverlässigkeit (bei TCP).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Protokollkommunikation:</strong>
+                        <ul>
+                            <li>Die Transportschichten von Client und Server verwenden TCP, um verlorene Segmente erneut anzufordern und Sequenzen abzugleichen.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>3. Internetschicht</h3>
+                <ul>
+                    <li><strong>Beispiele:</strong> IP, ICMP.</li>
+                    <li><strong>Funktion:</strong>
+                        <ul>
+                            <li>Routing und Adressierung der Pakete.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Protokollkommunikation:</strong>
+                        <ul>
+                            <li>Die Internetschichten von Routern verwenden IP, um Datenpakete basierend auf den IP-Adressen an das richtige Zielnetzwerk zu leiten.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>4. Netzzugangsschicht</h3>
+                <ul>
+                    <li><strong>Beispiele:</strong> Ethernet, WLAN.</li>
+                    <li><strong>Funktion:</strong>
+                        <ul>
+                            <li>Übertragung von Frames über das physische Medium.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Protokollkommunikation:</strong>
+                        <ul>
+                            <li>Ein Switch leitet Frames basierend auf MAC-Adressen an das richtige Gerät weiter.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Diagramm: Protokollkommunikation im TCP/IP-Modell</h3>
+                <pre>
+Anwendungsschicht (HTTP) <--> Anwendungsschicht (HTTP)
+Transportschicht (TCP) <--> Transportschicht (TCP)
+Internetschicht (IP) <--> Internetschicht (IP)
+Netzzugangsschicht (Ethernet) <--> Netzzugangsschicht (Ethernet)
+                </pre>
+            </section>
+
+            <section id="8-zusammenfassung">
+                <h2>8. Zusammenfassung</h2>
+                <ol>
+                    <li><strong>Nutzdaten und Kapselung:</strong>
+                        <ul>
+                            <li>Daten werden durch die Schichten des TCP/IP-Modells transportiert und in jedem Schritt mit spezifischen Headern versehen.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Segmentierung und Re-Assemblierung:</strong>
+                        <ul>
+                            <li>Große Datenmengen werden in kleinere Segmente unterteilt, um effizient über das Netzwerk übertragen zu werden. Am Empfänger werden diese Segmente wieder korrekt zusammengesetzt.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Multiplexing:</strong>
+                        <ul>
+                            <li>Ermöglicht die gleichzeitige Übertragung mehrerer Datenströme über dasselbe physische Medium, indem sie zeitlich oder frequenzmäßig getrennt werden.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Horizontale und vertikale Kommunikation:</strong>
+                        <ul>
+                            <li>Vertikale Kommunikation beschreibt den Schichtübertrag auf einem einzelnen Gerät.</li>
+                            <li>Horizontale Kommunikation ermöglicht die direkte Interaktion gleichartiger Schichten auf verschiedenen Geräten.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Protokollkommunikation:</strong>
+                        <ul>
+                            <li>Jede Schicht hat spezifische Protokolle, die sicherstellen, dass die Datenübertragung effizient und fehlerfrei erfolgt.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Durch das Verständnis dieser Grundlagen lässt sich die Funktionsweise moderner Netzwerke besser nachvollziehen und effektivere Netzwerkdesigns entwickeln.</p>
+            </section>
+
+            <section id="9-anhang-tabellen-und-beispiele">
+                <h2>9. Anhang: Tabellen und Beispiele</h2>
+
+                <h3>Tabelle 1: Vergleich der Übertragungsmedien</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Übertragungsmedium</th>
+                            <th>Beschreibung</th>
+                            <th>Beispiele</th>
+                            <th>Vorteile</th>
+                            <th>Nachteile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Kupferkabel</td>
+                            <td>Übertragen elektrische Signale, geeignet für kurze Strecken im LAN.</td>
+                            <td>Ethernet-Kabel (Cat5e, Cat6)</td>
+                            <td>Kostengünstig, weit verbreitet</td>
+                            <td>Begrenzte Reichweite, anfällig für Interferenzen</td>
+                        </tr>
+                        <tr>
+                            <td>Glasfaser</td>
+                            <td>Überträgt Lichtsignale, ideal für große Entfernungen und hohe Geschwindigkeiten.</td>
+                            <td>Glasfaserkabel</td>
+                            <td>Hohe Geschwindigkeit, große Reichweite</td>
+                            <td>Teurer, empfindlich gegenüber Biegeradien</td>
+                        </tr>
+                        <tr>
+                            <td>Funk</td>
+                            <td>Ermöglicht drahtlose Kommunikation.</td>
+                            <td>WLAN, Mobilfunk</td>
+                            <td>Flexibel, keine physischen Verbindungen erforderlich</td>
+                            <td>Begrenzte Bandbreite, Sicherheitsrisiken</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Beispiel: Datenübertragung über verschiedene Medien</h3>
+                <ul>
+                    <li><strong>Ethernet-Kabel (Kupfer):</strong>
+                        <ul>
+                            <li><strong>Szenario:</strong> Ein Computer wird über ein Ethernet-Kabel mit einem Router verbunden.</li>
+                            <li><strong>Vorteil:</strong> Stabile und schnelle Verbindung im Heimnetzwerk.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Glasfaser:</strong>
+                        <ul>
+                            <li><strong>Szenario:</strong> Internetdienstanbieter (ISP) nutzen Glasfaserkabel, um hohe Geschwindigkeiten und große Datenmengen zu übertragen.</li>
+                            <li><strong>Vorteil:</strong> Ermöglicht schnelle Downloads und Streaming über große Entfernungen ohne Signalverlust.</li>
+                        </ul>
+                    </li>
+                    <li><strong>WLAN (Funk):</strong>
+                        <ul>
+                            <li><strong>Szenario:</strong> Smartphones und Laptops verbinden sich drahtlos mit dem Internet über WLAN.</li>
+                            <li><strong>Vorteil:</strong> Bewegungsfreiheit innerhalb des Abdeckungsbereichs des Routers.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Tabelle 2: Vergleich der Schichtenmodelle ISO/OSI und TCP/IP</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Merkmal</th>
+                            <th>ISO/OSI-Modell</th>
+                            <th>TCP/IP-Modell</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anzahl der Schichten</td>
+                            <td>7 Schichten</td>
+                            <td>4 Schichten</td>
+                        </tr>
+                        <tr>
+                            <td>Schichten</td>
+                            <td>Anwendung, Präsentation, Sitzung, Transport, Netzwerk, Datenverbindung, Physik</td>
+                            <td>Anwendung, Transport, Internet, Netzzugang</td>
+                        </tr>
+                        <tr>
+                            <td>Flexibilität</td>
+                            <td>Strenger, detaillierter</td>
+                            <td>Flexibler, praxisorientierter</td>
+                        </tr>
+                        <tr>
+                            <td>Verbreitung</td>
+                            <td>Weniger verbreitet in der Praxis</td>
+                            <td>Weit verbreitet, insbesondere im Internet</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Tabelle 3: Vergleich der Multiplexing-Methoden</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Multiplexing-Typ</th>
+                            <th>Funktionsweise</th>
+                            <th>Anwendungsbeispiele</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TDM</td>
+                            <td>Datenströme teilen sich das Medium in Zeitfenstern</td>
+                            <td>Telefonnetze, digitale Signalübertragung</td>
+                        </tr>
+                        <tr>
+                            <td>FDM</td>
+                            <td>Datenströme nutzen unterschiedliche Frequenzbänder</td>
+                            <td>Radio, Fernsehen, DSL-Internet</td>
+                        </tr>
+                        <tr>
+                            <td>WDM</td>
+                            <td>Nutzung verschiedener Lichtwellenlängen in Glasfaser</td>
+                            <td>Hochgeschwindigkeits-Glasfasernetzwerke</td>
+                        </tr>
+                        <tr>
+                            <td>CDM</td>
+                            <td>Datenströme werden mit einzigartigen Codes versehen</td>
+                            <td>Mobilfunknetze (CDMA)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </article>
+    </div>
+
+    <footer>
+        &copy; 2024 Grundlagen der Netzwerkkommunikation. Alle Rechte vorbehalten.
+    </footer>
+
+</body>
+</html>
